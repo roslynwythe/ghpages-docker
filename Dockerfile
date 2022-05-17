@@ -109,6 +109,10 @@ RUN gem install jekyll:3.9.2 \
     github-pages:226 -- \
     --use-system-libraries
 
+# Uninstall duplicate/wrong versions of kramdown and rouge
+RUN gem uninstall kramdown:2.4.0 \
+    rouge:3.28.0
+
 #
 # Gems
 # User
