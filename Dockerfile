@@ -9,12 +9,8 @@ COPY copy/all /
 #
 
 ENV BUNDLE_HOME=/usr/local/bundle
-# ENV BUNDLE_APP_CONFIG=/usr/local/bundle
-# ENV BUNDLE_DISABLE_PLATFORM_WARNINGS=true
-# ENV BUNDLE_BIN=/usr/local/bundle/bin
 ENV GEM_BIN=/usr/gem/bin
 ENV GEM_HOME=/usr/gem
-# ENV RUBYOPT=-W0
 
 #
 # EnvVars
@@ -22,12 +18,8 @@ ENV GEM_HOME=/usr/gem
 #
 
 ENV JEKYLL_VAR_DIR=/var/jekyll
-# ENV JEKYLL_DOCKER_TAG=pages
-# ENV JEKYLL_VERSION=3.9.2
-# ENV JEKYLL_DOCKER_NAME=pages
 ENV JEKYLL_DATA_DIR=/srv/jekyll
 ENV JEKYLL_BIN=/usr/jekyll/bin
-# ENV JEKYLL_ENV=development
 
 #
 # EnvVars
@@ -39,27 +31,7 @@ ENV LANGUAGE=en_US:en
 ENV TZ=America/Chicago
 ENV PATH="$JEKYLL_BIN:$PATH"
 ENV LC_ALL=en_US.UTF-8
-# ENV LANG=en_US.UTF-8
 ENV LANGUAGE=en_US
-
-#
-# EnvVars
-# User
-#
-
-#
-# EnvVars
-# Main
-#
-
-# env VERBOSE=false
-# env FORCE_POLLING=false
-# env DRAFTS=false
-
-#
-# Packages
-# User
-#
 
 #
 # Packages
