@@ -1,4 +1,4 @@
-base_image: ruby:3.1.1-alpine3.15
+base_image: ruby:2.7.3-alpine3.13 # altered by ev 05-06-2022
 user: jekyll
 aliases:
   latest: 4.2.2
@@ -10,4 +10,4 @@ tags:
   pages: pages
 releases:
   tag:
-    pages: 3.8.5 # 05-15-2020
+    pages: 3.9.2 # altered by ev 05-06-2022
