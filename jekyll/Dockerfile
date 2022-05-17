@@ -1,7 +1,6 @@
-# altered by ev 05-06-2022
 FROM ruby:2.7.3-alpine3.13 
 LABEL maintainer "Jordon Bedwell <jordon@envygeeks.io>"
-# altered by ev 05-06-2022
+
 COPY copy/all /
 
 #
@@ -23,11 +22,8 @@ ENV RUBYOPT=-W0
 #
 
 ENV JEKYLL_VAR_DIR=/var/jekyll
-# altered by ev 05-06-2022
 ENV JEKYLL_DOCKER_TAG=pages
-# altered by ev 05-06-2022
 ENV JEKYLL_VERSION=3.9.2
-# altered by ev 05-06-2022
 # ENV JEKYLL_DOCKER_COMMIT=<%= `git rev-parse --verify HEAD`.strip %>
 ENV JEKYLL_DOCKER_NAME=pages
 ENV JEKYLL_DATA_DIR=/srv/jekyll
@@ -52,7 +48,6 @@ ENV LANGUAGE=en_US
 # User
 #
 
-# altered by ev 05-06-2022
 # <% if @meta.env? %>
 #   ENV <%= @meta.env %>
 # <% end %>
@@ -71,7 +66,6 @@ env DRAFTS=false
 # User
 #
 
-# altered by ev 05-06-2022
 # <% if @meta.packages? %>
 #   RUN apk --no-cache add <%= @meta.packages %>
 # <% end %>
@@ -135,7 +129,6 @@ RUN unset GEM_HOME && unset GEM_BIN && \
 # Main
 #
 
-# altered by ev 05-06-2022
 RUN unset GEM_HOME && unset GEM_BIN && yes | gem install --force bundler
 RUN gem install jekyll:3.9.2 \
     # html-proofer: \
@@ -162,7 +155,6 @@ RUN gem install jekyll:3.9.2 \
 # User
 #
 
-# altered by ev 05-06-2022
 # <% if @meta.gems? %>
 #   # Stops slow Nokogiri!
 #   RUN gem install <%=@meta.gems %> -- \
@@ -178,7 +170,6 @@ RUN adduser  -Su 1000 -G \
 # And on pages.  Gems are unsupported.
 #
 
-# altered by ev 05-06-2022
 # <% if @meta.name == "minimal" || @meta.name == "pages" || @meta.tag == "pages" %>
    RUN apk --no-cache del \
       linux-headers \
