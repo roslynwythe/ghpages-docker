@@ -39,20 +39,20 @@ ENV LANGUAGE=en_US
 #
 
 RUN apk --no-cache add \
-  # zlib-dev \
-  # libffi-dev \
-  # build-base \
-  # libxml2-dev \
-  # imagemagick-dev \
-  # readline-dev \
-  # libxslt-dev \
-  # libffi-dev \
-  # yaml-dev \
-  # zlib-dev \
-  # vips-dev \
-  # vips-tools \
-  sqlite-dev 
-  # cmake
+  zlib-dev \
+  libffi-dev \
+  build-base \
+  libxml2-dev \
+  imagemagick-dev \
+  readline-dev \
+  libxslt-dev \
+  libffi-dev \
+  yaml-dev \
+  zlib-dev \
+  vips-dev \
+  vips-tools \
+  sqlite-dev \
+  cmake
 
 #
 # Packages
@@ -60,8 +60,8 @@ RUN apk --no-cache add \
 #
 
 RUN apk --no-cache add \
-  # linux-headers \
-  # openjdk8-jre \
+  linux-headers \
+  openjdk8-jre \
   less \
   zlib \
   libxml2 \
@@ -111,22 +111,22 @@ RUN adduser  -Su 1000 -G \
 #
 
 RUN apk --no-cache del \
-#   linux-headers \
-#   openjdk8-jre \
-#   zlib-dev \
-#   build-base \
-#   libxml2-dev \
-#   libxslt-dev \
-#   readline-dev \
-#   imagemagick-dev\
-#   libffi-dev \
-  ruby-dev 
-#   yaml-dev \
-#   zlib-dev \
-#   libffi-dev \
-#   vips-dev \
-#   vips-tools \
-#   cmake
+  linux-headers \
+  openjdk8-jre \
+  zlib-dev \
+  build-base \
+  libxml2-dev \
+  libxslt-dev \
+  readline-dev \
+  imagemagick-dev\
+  libffi-dev \
+  ruby-dev \
+  yaml-dev \
+  zlib-dev \
+  libffi-dev \
+  vips-dev \
+  vips-tools \
+  cmake
 
 RUN mkdir -p $JEKYLL_VAR_DIR
 RUN mkdir -p $JEKYLL_DATA_DIR
