@@ -38,45 +38,45 @@ ENV LANGUAGE=en_US
 # Dev
 #
 
-# RUN apk --no-cache add \
-#   zlib-dev \
-#   libffi-dev \
-#   build-base \
-#   libxml2-dev \
-#   imagemagick-dev \
-#   readline-dev \
-#   libxslt-dev \
-#   libffi-dev \
-#   yaml-dev \
-#   zlib-dev \
-#   vips-dev \
-#   vips-tools \
-#   sqlite-dev \
-#   cmake
+RUN apk --no-cache add \
+  # zlib-dev \
+  # libffi-dev \
+  # build-base \
+  # libxml2-dev \
+  # imagemagick-dev \
+  # readline-dev \
+  # libxslt-dev \
+  # libffi-dev \
+  # yaml-dev \
+  # zlib-dev \
+  # vips-dev \
+  # vips-tools \
+  sqlite-dev 
+  # cmake
 
 #
 # Packages
 # Main
 #
 
-# RUN apk --no-cache add \
-#   linux-headers \
-#   openjdk8-jre \
-#   less \
-#   zlib \
-#   libxml2 \
-#   readline \
-#   libxslt \
-#   libffi \
-#   git \
-#   nodejs \
-#   tzdata \
-#   shadow \
-#   bash \
-#   su-exec \
-#   npm \
-#   libressl \
-#   yarn
+RUN apk --no-cache add \
+  # linux-headers \
+  # openjdk8-jre \
+  less \
+  zlib \
+  libxml2 \
+  readline \
+  libxslt \
+  libffi \
+  git \
+  nodejs \
+  tzdata \
+  shadow \
+  bash \
+  su-exec \
+  npm \
+  libressl \
+  yarn
 
 #
 # Gems
@@ -110,7 +110,7 @@ RUN adduser  -Su 1000 -G \
 # And on pages.  Gems are unsupported.
 #
 
-# RUN apk --no-cache del \
+RUN apk --no-cache del \
 #   linux-headers \
 #   openjdk8-jre \
 #   zlib-dev \
@@ -120,7 +120,7 @@ RUN adduser  -Su 1000 -G \
 #   readline-dev \
 #   imagemagick-dev\
 #   libffi-dev \
-#   ruby-dev \
+  ruby-dev 
 #   yaml-dev \
 #   zlib-dev \
 #   libffi-dev \
