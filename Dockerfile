@@ -93,25 +93,27 @@ RUN unset GEM_HOME && unset GEM_BIN && \
 #
 
 RUN unset GEM_HOME && unset GEM_BIN && yes | gem install --force bundler
-RUN gem install jekyll:3.9.2 \
-    jekyll-mentions:1.6.0 \
-    jekyll-coffeescript:1.1.1 \
-    jekyll-sass-converter:1.5.2 \
-    jekyll-commonmark-ghpages:0.2.0 \
-    jekyll-paginate:1.1.0 \
-    kramdown:2.3.2 \
-    jemoji:0.12.0 \
-    jekyll-redirect-from:0.16.0 \
-    jekyll-sitemap:1.4.0 \
-    jekyll-feed:0.15.1 \
-    minima:2.5.1 \
-    jekyll-github-metadata:2.13.0 \
-    github-pages:226 -- \
+RUN gem install github-pages:226 -- \
     --use-system-libraries
+# RUN gem install jekyll:3.9.2 \
+#     jekyll-mentions:1.6.0 \
+#     jekyll-coffeescript:1.1.1 \
+#     jekyll-sass-converter:1.5.2 \
+#     jekyll-commonmark-ghpages:0.2.0 \
+#     jekyll-paginate:1.1.0 \
+#     kramdown:2.3.2 \
+#     jemoji:0.12.0 \
+#     jekyll-redirect-from:0.16.0 \
+#     jekyll-sitemap:1.4.0 \
+#     jekyll-feed:0.15.1 \
+#     minima:2.5.1 \
+#     jekyll-github-metadata:2.13.0 \
+#     github-pages:226 -- \
+#     --use-system-libraries
 
 # Uninstall duplicate/wrong versions of kramdown and rouge
-RUN gem uninstall kramdown:2.4.0 \
-    rouge:3.28.0
+# RUN gem uninstall kramdown:2.4.0 \
+#     rouge:3.28.0
 
 #
 # Gems
