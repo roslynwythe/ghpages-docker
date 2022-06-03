@@ -93,7 +93,7 @@ RUN unset GEM_HOME && unset GEM_BIN && \
 #
 
 RUN unset GEM_HOME && unset GEM_BIN && yes | gem install --force bundler
-RUN gem install github-pages:226 -- \
+RUN gem install github-pages -- \
     --use-system-libraries
 
 #
