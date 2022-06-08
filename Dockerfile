@@ -129,14 +129,6 @@ RUN apk --no-cache del \
   vips-tools \
   cmake
 
-### Build Stage 2
-FROM ruby:2.7.3-alpine3.13
-
-# Copy required binaries and installed gems from build stage to final stage (I think???)
-COPY --from=build $BUNDLE_HOME $BUNDLE_HOME
-COPY --from=build $GEM_BIN $GEM_BIN
-COPY --from=build $GEM_HOM $GEM_HOME
-
 RUN mkdir -p $JEKYLL_VAR_DIR
 RUN mkdir -p $JEKYLL_DATA_DIR
 RUN chown -R jekyll:jekyll $JEKYLL_DATA_DIR
@@ -146,6 +138,16 @@ RUN rm -rf /home/jekyll/.gem
 RUN rm -rf $BUNDLE_HOME/cache
 RUN rm -rf $GEM_HOME/cache
 RUN rm -rf /root/.gem
+
+### Build Stage 2
+FROM ruby:2.7.3-alpine3.13
+
+# Copy shell scripts from build stage
+COPY --from=build /usr/jekyll/bin /usr/jekyll/bin
+
+# Copy required binaries and installed gems from build stage to final stage (I think???)
+COPY --from=build $BUNDLE_HOME $BUNDLE_HOME
+COPY --from=build $GEM_HOM $GEM_HOME
 
 # Work around rubygems/rubygems#3572
 RUN mkdir -p /usr/gem/cache/bundle
