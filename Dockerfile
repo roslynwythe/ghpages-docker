@@ -13,6 +13,11 @@ ENV BUNDLE_HOME=/usr/local/bundle
 ENV GEM_BIN=/usr/gem/bin
 ENV GEM_HOME=/usr/gem
 
+ENV BUNDLE_APP_CONFIG=/usr/local/bundle
+ENV BUNDLE_DISABLE_PLATFORM_WARNINGS=true
+ENV BUNDLE_BIN=/usr/local/bundle/bin
+ENV RUBYOPT=-W0
+
 #
 # EnvVars
 # Image
@@ -129,6 +134,62 @@ RUN apk --no-cache del \
   vips-tools \
   cmake
 
+### Build Stage 2
+FROM ruby:2.7.3-alpine3.13
+
+# Copy shell scripts from build stage
+COPY --from=build /usr/jekyll/bin /usr/jekyll/bin
+
+#
+# EnvVars
+# Ruby
+#
+
+ENV BUNDLE_HOME=/usr/local/bundle
+ENV GEM_BIN=/usr/gem/bin
+ENV GEM_HOME=/usr/gem
+
+ENV BUNDLE_APP_CONFIG=/usr/local/bundle
+ENV BUNDLE_DISABLE_PLATFORM_WARNINGS=true
+ENV BUNDLE_BIN=/usr/local/bundle/bin
+ENV RUBYOPT=-W0
+
+#
+# EnvVars
+# Image
+#
+
+ENV JEKYLL_VAR_DIR=/var/jekyll
+ENV JEKYLL_DATA_DIR=/srv/jekyll
+ENV JEKYLL_BIN=/usr/jekyll/bin
+
+#
+# EnvVars
+# System
+#
+
+ENV LANG=en_US.UTF-8
+ENV LANGUAGE=en_US:en
+ENV TZ=America/Chicago
+ENV PATH="$JEKYLL_BIN:$PATH"
+ENV LC_ALL=en_US.UTF-8
+ENV LANGUAGE=en_US
+
+# Reinstall to see if I can get the container running... remove these dupe lines later
+RUN apk --no-cache add \
+  bash \
+  su-exec
+
+# Copy required binaries and installed gems from build stage to final stage (I think???)
+COPY --from=build /usr/local/bundle/ /usr/local/bundle/
+COPY --from=build /usr/gem/ /usr/gem/
+COPY --from=build /usr/gem/bin/ /usr/gem/bin/
+
+RUN addgroup -Sg 1000 jekyll
+RUN adduser  -Su 1000 -G \
+  jekyll jekyll
+
+
 RUN mkdir -p $JEKYLL_VAR_DIR
 RUN mkdir -p $JEKYLL_DATA_DIR
 RUN chown -R jekyll:jekyll $JEKYLL_DATA_DIR
@@ -139,15 +200,7 @@ RUN rm -rf $BUNDLE_HOME/cache
 RUN rm -rf $GEM_HOME/cache
 RUN rm -rf /root/.gem
 
-### Build Stage 2
-FROM ruby:2.7.3-alpine3.13
 
-# Copy shell scripts from build stage
-COPY --from=build /usr/jekyll/bin /usr/jekyll/bin
-
-# Copy required binaries and installed gems from build stage to final stage (I think???)
-COPY --from=build $BUNDLE_HOME $BUNDLE_HOME
-COPY --from=build $GEM_HOM $GEM_HOME
 
 # Work around rubygems/rubygems#3572
 RUN mkdir -p /usr/gem/cache/bundle
