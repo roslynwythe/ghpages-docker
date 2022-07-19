@@ -1,73 +1,41 @@
 # GitHub Pages Docker
 
-Include a project description that explains **what** your project is and **why** it exists. Aim for no more than 3-5 concise sentences. For example, you might say:
+This repo contains the source code (i.e. Dockerfile and related scripts) required to build a Docker image that is pegged to the dependency versions used by GitHub Pages. It is based on the official [Jekyll Docker image](https://github.com/envygeeks/jekyll-docker). The resulting Docker image is hosted on [Hack for LA’s Docker Hub repo](https://hub.docker.com/r/hackforlaops/ghpages/tags).
 
-{Project Name} is a project of Hack for LA. Hack for LA is a brigade of a Code for America that exists to {your mission}. {Project Name} helps {target users} accomplish {goal of project}. The {app/site/thing you're building}'s main features include {very brief feature descriptions}.
+This Docker image is specifically designed to run a local Jekyll server for developing and testing the Hack for LA organization’s website. It is not intended for deployment. However, the image can be used by anyone who requires a local development environment that mirrors GitHub Pages.
 
-### Project context
-
-Civic projects often exist within a larger context that may include multiple stakeholders, historic relationships, associated research, or other details that are relevant but not *required* for direct contributions. Gathering these details in one place is useful, but the ReadMe isn't that place. Use this section to [link to a Google Doc](#) or other documentation repository where contributors can dig in if they so choose. This is also a good place to link to your Code of Conduct.
-
-### Technology used
-
-- Each platform or framework should get its own bullet.
-- Each platform should include an [active link](#) to the official documentation.
+More detailed technical information can be find on this repo's [wiki](https://github.com/hackforla/ghpages-docker/wiki).
 
 
+## Usage instructions
 
-# How to contribute
+### If you are a member of the Hack for LA organization:
+This repo uses a GitHub Action to build and push the Docker image to the [hackforlaops/ghpages repo](https://hub.docker.com/r/hackforlaops/ghpages/tags) on Docker Hub. The newly-built image will replace the previous version, and appear with the tag `latest`. The build-and-push action can be triggered in one of two ways:
+1. Automatically, whenever a new commit is pushed to the repo. (*Unless* the commit only contains changes to the `.github` directory, which is ignored.) This means that a new image will be built automatically any time the Dockerfile is updated to match a new version of Ruby or Jekyll being used by GitHub Pages.
+2. Manually, by navigating to the **Actions** tab in the menu bar at the top of the repo, clicking on the **Publish Docker Image** workflow in the list of workflows on the left, and then clicking the **Run Workflow** button on the right. This will build and push a new image whether any changes have been made or not.
 
-Explain the different ways people can contribute. For example:
-
-- Join the team {on Slack/at our weekly hack night/etc}.
-- To help with user research, {do ABC}.
-- To provide design support, {do XYZ}.
-- To contribute to the code, follow the instructions below.
-
-Remember to provide direct links to each channel.
-
-
-
-## Installation instructions
-
-1. Step-by-step instructions help new contributors get a development environment up and running quickly.
-2. You'll want to find the balance between being specific enough for novices to follow, without being so specific that you reinvent the wheel by providing overly-basic instructions that can be found elsewhere.
-3. Feel free to adapt this section and its sub-sections to your own processes.
-4. Alternatively, you can move everything from *Installation instructions* through *Testing* to a separate **Contributing.md** file to keep your **ReadMe.md** more succinct.
-
-
-### Working with issues
-
-- Explain how to submit a bug.
-- Explain how to submit a feature request.
-- Explain how to contribute to an existing issue.
-
-To create a new issue, please use the blank issue template (available when you click New Issue).  If you want to create an issue for other projects to use, please create the issue in your own repository and send a slack message to one of your hack night hosts with the link.
-
-
-### Working with forks and branches
-
-- Explain your guidelines here.
-
-
-### Working with pull requests and reviews
-
-- Explain your process.
-
-
-### Testing
-
-- Provide instructions.
-
-
-
-# Contact info
-
-Include at least one way (or more, if possible) to reach your team with questions or comments.
-
+### If you are NOT a member of Hack for LA:
+Hack for LA's website is run locally using `docker compose`. To use this image in the same way for your own Jekyll-based projects, do the following: 
+1. Create or modify a `docker-compose.yml` file in the root of your website directory with the following lines. (Note that you should replace `<your-name>` with whatever you would like your Docker container to be called.)
+```
+version: "3"
+services:
+  <your-name>:
+    image: hackforlaops/ghpages:latest
+    container_name: <your-name>
+    command: jekyll serve --force_polling --livereload --config _config.yml,_config.docker.yml -I
+    environment:
+      - JEKYLL_ENV=docker
+    ports:
+      - 4000:4000
+      - 35729:35729
+    volumes:
+      - .:/srv/jekyll
+```
+2. Run `docker compose up`.
 
 ### Licensing
 
-Include details about the project's open source status.
+This code is made available under the [GNU General Public License v2.0](https://github.com/hackforla/ghpages-docker/blob/main/LICENSE)
 
 *this readme file sourced from [Jessica Sand](http://jessicasand.com/other-stuff/just-enough-docs/)*
