@@ -8,7 +8,7 @@
 ###
 
 # The FROM command specifies a base image to start with. We're using an Alpine Linux base because it's small (around 5MB), together with a Ruby installation 
-# that matches GitHub Pages' current Ruby version (2.7.3, as of 06/13/2022)
+# that matches GitHub Pages' current Ruby version (2.7.3, as of 07/19/2022)
 FROM ruby:2.7.3-alpine3.13 AS build
 LABEL maintainer "Jordon Bedwell <jordon@envygeeks.io>"
 
@@ -64,7 +64,7 @@ RUN unset GEM_HOME && unset GEM_BIN && \
 # Install github-pages gem. 
 # This gem bundles all dependencies required by GitHub Pages, including Jekyll.
 #
-# (When no version number is specified, it will install the most recent version available. (v226, as of 06/13/2022)
+# (When no version number is specified, it will install the most recent version available. (v227, as of 07/19/2022)
 # To specify a version, use "gem install github-pages:<version_number>")
 RUN gem install github-pages -- \
     --use-system-libraries
