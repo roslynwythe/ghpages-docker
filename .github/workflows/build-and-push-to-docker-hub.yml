@@ -2,8 +2,11 @@ name: Publish Docker Image
 
 on:
   push:
-    paths-ignore:
-      - '.github/**'
+    paths:
+      - 'Dockerfile'
+      - '/copy'
+      - '.dockerignore'
+      - '.gitignore'
   workflow_dispatch:
 
 jobs:
