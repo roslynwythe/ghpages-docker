@@ -18,7 +18,22 @@ jobs:
         run: gh issue create 
             --repo github.com/hackforla/ops
             --title "GHPAGES-DOCKER Build Has Failed" 
-            --body "A recently triggered **build-and-push-to-docker-hub** workflow in the [ghpages-docker repo](https://github.com/hackforla/ghpages-docker) did not complete successfully."
+            --body "A recently triggered **build-and-push-to-docker-hub** workflow in the [ghpages-docker repo](https://github.com/hackforla/ghpages-docker) has failed."
+        env:
+            GH_TOKEN: ${{ secrets.Daniel_Ridge_PAT }}
+  
+  on-success:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v3
+
+      - name: Open issue
+        run: gh issue create 
+            --repo github.com/hackforla/ops
+            --title "GHPAGES-DOCKER Build Was Successful" 
+            --body "A recently triggered **build-and-push-to-docker-hub** workflow in the [ghpages-docker repo](https://github.com/hackforla/ghpages-docker) has completed successfully."
         env:
             GH_TOKEN: ${{ secrets.Daniel_Ridge_PAT }}
 
