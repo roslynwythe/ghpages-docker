@@ -32,7 +32,11 @@ services:
     volumes:
       - .:/srv/jekyll
 ```
-2. Run `docker compose up`.
+2. Create a new file in the root of your website called `_config.docker.yml` with a single line:
+```
+url: "http://localhost:4000"
+```
+3. Run `docker compose up`.
 
 ### Licensing
 
