@@ -11,7 +11,7 @@ More detailed technical information can be find on this repo's [wiki](https://gi
 
 ### If you are a member of the Hack for LA organization:
 This repo uses a GitHub Action to build and push the Docker image to the [hackforlaops/ghpages repo](https://hub.docker.com/r/hackforlaops/ghpages/tags) on Docker Hub. The newly-built image will replace the previous version, and appear with the tag `latest`. The build-and-push action can be triggered in one of two ways:
-1. Automatically, whenever a new commit is pushed to the repo. (*Unless* the commit only contains changes to the `.github` directory, which is ignored.) This means that a new image will be built automatically any time the Dockerfile is updated to match a new version of Ruby or Jekyll being used by GitHub Pages.
+1. Automatically, whenever a new commit is pushed that changes the *Dockerfile*, *.dockerignore* file, *.gitignore* file, or anything in the `/copy` directory. (Commits to any other files will not trigger a new build.) This means that a new image will be built automatically any time the Dockerfile is updated to match a new version of Ruby or Jekyll being used by GitHub Pages.
 2. Manually, by navigating to the **Actions** tab in the menu bar at the top of the repo, clicking on the **Publish Docker Image** workflow in the list of workflows on the left, and then clicking the **Run Workflow** button on the right. This will build and push a new image whether any changes have been made or not.
 
 ### If you are NOT a member of Hack for LA:
