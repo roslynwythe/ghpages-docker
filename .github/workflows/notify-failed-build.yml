@@ -1,4 +1,4 @@
-name: Open issue when Docker image build fails
+name: Notify Docker build success or failure
 
 on:
   workflow_run:
