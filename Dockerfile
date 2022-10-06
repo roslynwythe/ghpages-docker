@@ -8,7 +8,7 @@
 ###
 
 # The FROM command specifies a base image to start with. We're using an Alpine Linux base because it's small (around 5MB), together with a Ruby installation 
-# that matches GitHub Pages' current Ruby version (2.7.3, as of 08/03/2022)
+# that matches GitHub Pages' current Ruby version (2.7.3-alpine3.13 as of 08/03/2022, ruby:2.7.4-alpine3.14 as of 8/18/2022)
 FROM ruby:2.7.4-alpine3.14 AS build
 
 # Set Ruby ENV variables
