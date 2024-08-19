@@ -8,8 +8,8 @@
 ###
 
 # The FROM command specifies a base image to start with. We're using an Alpine Linux base because it's small (around 5MB), together with a Ruby installation 
-# that matches GitHub Pages' current Ruby version (2.7.3-alpine3.13 as of 08/03/2022, ruby:2.7.4-alpine3.14 as of 8/18/2022)
-FROM ruby:2.7.4-alpine3.14 AS build
+# that matches GitHub Pages' current Ruby version (2.7.3-alpine3.13 as of 08/03/2022, ruby:2.7.4-alpine3.14 as of 8/18/2022, ruby:3.3.4-alpine3.20 as of 8/19/2024 )
+FROM ruby:3.3.4-alpine3.20 AS build
 
 # Set Ruby ENV variables
 ENV GEM_BIN=/usr/gem/bin
@@ -72,7 +72,7 @@ RUN gem install github-pages -- \
 ### BUILD STAGE 2
 ###
 
-FROM ruby:2.7.4-alpine3.14
+FROM ruby:3.3.4-alpine3.20
 LABEL maintainer "Jordon Bedwell <jordon@envygeeks.io>"
 
 # Copy shell scripts from the Dockerfile directory into the root of the new build stage. 
